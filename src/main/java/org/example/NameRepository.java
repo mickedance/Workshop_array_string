@@ -37,6 +37,8 @@ public class NameRepository {
     }
 
     private static boolean addName(String name1, String name2) {
+        if(name1.length()<1 || name2.length()<1)
+            return false;
         names = Arrays.copyOf(names, names.length + 1);
         names[names.length - 1] = name1.trim() + " " + name2.trim();
 
@@ -52,6 +54,26 @@ public class NameRepository {
     //    Returns all names in a new array
     public static String[] findAll() {
         return names;
-
     }
+
+//    Returns name if found and null if not found.
+    public static String find(final String fullName){
+        for(String name: names){
+           if(name.equalsIgnoreCase(fullName)){
+               return name;
+           }
+        }
+        return null;
+    }
+/*Should add a new name to the array. Returns true when name was added and false when the array contains
+    the name.*/
+
+    public static boolean add(final String fullName){
+        if(fullName.split(" ").length>1)
+            return addName(fullName.split(" ")[0], fullName.split(" ")[1]);
+
+        System.out.println("Error, needs First and Last name");
+        return false;
+    }
+
 }
