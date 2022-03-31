@@ -75,5 +75,53 @@ public class NameRepository {
         System.out.println("Error, needs First and Last name");
         return false;
     }
+    /*Searches the array trying to find all names that has passed in first name. Returns a String array containing all
+    matches.*/
+    public static String[] findByFirstName(final String firstName){
+        String[] namesToReturn = new String[0];
+
+        for(String name: names){
+            if(name.split(" ")[0].equalsIgnoreCase(firstName.trim())){
+                namesToReturn = Arrays.copyOf(namesToReturn, namesToReturn.length+1);
+                namesToReturn[namesToReturn.length-1] = name;
+            }
+        }
+        return namesToReturn;
+    }
+
+/*Searches the array trying to find all names that has passed in last name. Returns a String array containing all
+    matches.*/
+    public static String[] findByLastName(final String lastName ){
+        String[] namesToReturn = new String[0];
+
+        for(String name: names){
+            if(name.split(" ")[1].equalsIgnoreCase(lastName.trim())){
+                namesToReturn = Arrays.copyOf(namesToReturn, namesToReturn.length+1);
+                namesToReturn[namesToReturn.length-1] = name;
+            }
+        }
+        return namesToReturn;
+    }
+
+/*Should find a name and replace it with new fullName if available. Returns true if name was found and updated
+    with the new name. False if name could not be updated because name wasn’t found or name was found but an
+    existing name matching the updatedName already exists*/
+    public static boolean update(final String original, final String updatedName){
+
+        for(int i=0;i< names.length;i++){
+            //if we found name to update, see if it will be unique one than.
+            if(names[i].equalsIgnoreCase(original)){
+                for(int j=i+i;j< names.length;j++){
+                    //Duplicated find
+                    if(names[j].equalsIgnoreCase(updatedName))
+                        return false;
+                }
+                names[i]= updatedName;
+                if(names[i].equals(updatedName))
+                    return true;
+            }
+        }
+        return false;
+    }
 
 }
