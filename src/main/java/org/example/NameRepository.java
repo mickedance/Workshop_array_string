@@ -3,7 +3,7 @@ package org.example;
 import java.util.Arrays;
 
 public class NameRepository {
-    public static String[] names = new String[0];
+    private static String[] names = new String[0];
 
     public static void main(String[] args) {
 
@@ -25,10 +25,10 @@ public class NameRepository {
                 String nameFirst = name.split(" ")[0];
                 String nameLast = name.split(" ")[1];
                 if (nameFirst.length() > 0 && nameLast.length() > 0) {
-                    if (addName(nameFirst, nameLast))
-                        System.out.println("Name: " + names[names.length - 1] + " Added");
-                    else
-                        System.out.println("Error on setting new names");
+                    addName(nameFirst, nameLast);
+                      //  System.out.println("Name: " + names[names.length - 1] + " Added");
+                   // else
+                     //   System.out.println("Error on setting new names");
                 }
             } else {
                 System.out.println("Wrong namingformat. ");
@@ -37,7 +37,7 @@ public class NameRepository {
     }
 
     private static boolean addName(String name1, String name2) {
-        if(name1.length()<1 || name2.length()<1)
+        if(name1.length()<1 || name2.length()<1 || find(name1+" "+name2 )!=null)
             return false;
         names = Arrays.copyOf(names, names.length + 1);
         names[names.length - 1] = name1.trim() + " " + name2.trim();
@@ -48,7 +48,6 @@ public class NameRepository {
     //     Should completely empty the array.
     public static void clear() {
         names = new String[0];
-        System.out.println("Array name cleared!");
     }
 
     //    Returns all names in a new array
