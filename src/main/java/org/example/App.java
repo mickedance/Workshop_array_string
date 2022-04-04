@@ -1,5 +1,6 @@
 package org.example;
 
+import javax.xml.soap.Name;
 import java.util.Arrays;
 
 /**
@@ -70,5 +71,13 @@ public class App {
             System.out.println("updated");
         else
             System.out.println("could not update name");
+        System.out.println(Arrays.toString(NameRepository.findAll()));
+
+        System.out.println(        NameRepository.remove("Nina Sagasson"));
+
+        System.out.println(Arrays.toString(NameRepository.findAll()));
+
     }
+
+
 }

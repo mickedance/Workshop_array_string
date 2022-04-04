@@ -3,7 +3,7 @@ package org.example;
 import java.util.Arrays;
 
 public class NameRepository {
-    private static String[] names = new String[0];
+    public static String[] names = new String[0];
 
     public static void main(String[] args) {
 
@@ -53,7 +53,7 @@ public class NameRepository {
 
     //    Returns all names in a new array
     public static String[] findAll() {
-        return names;
+        return Arrays.copyOf(names, names.length);
     }
 
 //    Returns name if found and null if not found.
@@ -124,4 +124,17 @@ public class NameRepository {
         return false;
     }
 
+    public static boolean remove(final String fullName){
+        for(int i=0;i<names.length;i++){
+            if(names[i].equalsIgnoreCase(fullName)){
+                String[] tmp = Arrays.copyOf(names, i);
+                tmp = Arrays.copyOf(tmp, names.length-1);
+                for(int j=i;j< tmp.length;j++)
+                    tmp[j] = names[j+1];
+                names = tmp;
+                return true;
+            }
+        }
+        return false;
+    }
 }
